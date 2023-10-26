@@ -1,10 +1,11 @@
 import Grocery from './Grocery'
 type propTypes = {
     groceries: { id: number, name: string }[],
-    handleDelete: Function
+    handleDelete: Function,
+    handleClear: Function
 }
 
-const Groceries = ({ groceries, handleDelete }: propTypes) => {
+const Groceries = ({ groceries, handleDelete, handleClear }: propTypes) => {
     return (
         <section className="groceries">
             {
@@ -13,6 +14,10 @@ const Groceries = ({ groceries, handleDelete }: propTypes) => {
                         <Grocery handleDelete={handleDelete} grocery={grocery} key={index} />
                     )
                 })
+            }
+            {
+                groceries.length !== 0 &&
+                <button className='clear-btn' onClick={() => handleClear()}>Clear All</button>
             }
         </section>
     )

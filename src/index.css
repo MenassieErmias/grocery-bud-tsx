@@ -112,3 +112,21 @@ body {
 .delete-btn {
   background-color: rgb(209, 43, 21);
 }
+
+.clear-btn {
+  width: 100px;
+  margin: 1rem auto;
+  background-color: rgb(249, 70, 50);
+  padding: 0.25rem 1rem;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  font-family: inherit;
+  transition: all 0.2s ease-in-out;
+
+}
+
+.clear-btn:hover {
+  background-color: rgba(249, 70, 50, 0.401);
+  color: #241c1c;
+}

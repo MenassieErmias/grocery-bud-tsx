@@ -7,8 +7,11 @@ function App() {
   const [input, setInput] = useState<string>('');
   const [groceries, setGroceries] = useState<{ name: string, id: number }[]>([]);
 
-  const handleSubmit = (event: Event) => {
+  const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (input.length === 0) {
+      return;
+    }
     if (groceries.length === 0) {
       const newItem = {
         id: 1,
@@ -31,6 +34,10 @@ function App() {
     setGroceries(filteredGroceries);
   }
 
+  const handleClear = () => {
+    setGroceries([]);
+  }
+
   return (
     <main className="app">
       <h1 className="title">Grocery Bud</h1>
@@ -42,6 +49,7 @@ function App() {
       <Groceries
         groceries={groceries}
         handleDelete={handleDelete}
+        handleClear={handleClear}
       />
     </main>
   );
