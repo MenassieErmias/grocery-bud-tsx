@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Form from './components/Form';
+import Groceries from './components/Groceries';
 
+import { useState } from 'react';
 function App() {
+
+  const [input, setInput] = useState<string>('');
+  const [groceries, setGroceries] = useState<{ name: string, id: number }[]>([]);
+
+  const handleSubmit = (event: Event) => {
+    event.preventDefault();
+
+    if (groceries.length === 0) {
+      const newItem = {
+        id: 1,
+        name: input
+      }
+      setGroceries(prev => [...prev, newItem]);
+      setInput('');
+    } else {
+      const newItem = {
+        id: groceries[groceries.length - 1].id + 1,
+        name: input
+      }
+      setGroceries(prev => [...prev, newItem]);
+      setInput('');
+    }
+
+
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="app">
+      <h1 className="title">Grocery Bud</h1>
+      <Form
+        input={input}
+        setInput={setInput}
+        handleSubmit={handleSubmit}
+      />
+      <Groceries
+        groceries={groceries}
+      />
+    </main>
   );
 }
 
