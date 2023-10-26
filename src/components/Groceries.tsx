@@ -1,16 +1,16 @@
 import Grocery from './Grocery'
 type propTypes = {
     groceries: { id: number, name: string }[],
-
+    handleDelete: Function
 }
 
-const Groceries = ({ groceries }: propTypes) => {
+const Groceries = ({ groceries, handleDelete }: propTypes) => {
     return (
         <section className="groceries">
             {
                 groceries.map((grocery, index) => {
                     return (
-                        <Grocery grocery={grocery} key={index} />
+                        <Grocery handleDelete={handleDelete} grocery={grocery} key={index} />
                     )
                 })
             }

@@ -9,7 +9,6 @@ function App() {
 
   const handleSubmit = (event: Event) => {
     event.preventDefault();
-
     if (groceries.length === 0) {
       const newItem = {
         id: 1,
@@ -25,9 +24,11 @@ function App() {
       setGroceries(prev => [...prev, newItem]);
       setInput('');
     }
+  }
 
-
-
+  const handleDelete = (id: number) => {
+    const filteredGroceries = groceries.filter((grocery) => grocery.id !== id);
+    setGroceries(filteredGroceries);
   }
 
   return (
@@ -40,6 +41,7 @@ function App() {
       />
       <Groceries
         groceries={groceries}
+        handleDelete={handleDelete}
       />
     </main>
   );
