@@ -6,6 +6,8 @@ function App() {
 
   const [input, setInput] = useState<string>('');
   const [groceries, setGroceries] = useState<{ name: string, id: number }[]>([]);
+  const [editMode, setEditMode] = useState(false);
+  const [editId, setEditId] = useState<number>(0);
 
   const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -38,6 +40,17 @@ function App() {
     setGroceries([]);
   }
 
+  const handleEdit = (id: number) => {
+    const groceriesWithout = groceries.filter((grocery) => grocery.id !== id);
+    const editedGrocery = {
+      id: id,
+      name: input
+    }
+
+    setGroceries([...groceriesWithout, editedGrocery]);
+    setEditMode(false);
+  }
+
   return (
     <main className="app">
       <h1 className="title">Grocery Bud</h1>
@@ -45,11 +58,16 @@ function App() {
         input={input}
         setInput={setInput}
         handleSubmit={handleSubmit}
+        editMode={editMode}
+        handleEdit={handleEdit}
+        editId={editId}
       />
       <Groceries
         groceries={groceries}
         handleDelete={handleDelete}
         handleClear={handleClear}
+        setEditMode={setEditMode}
+        setEditId={setEditId}
       />
     </main>
   );

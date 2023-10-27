@@ -2,16 +2,18 @@ import Grocery from './Grocery'
 type propTypes = {
     groceries: { id: number, name: string }[],
     handleDelete: Function,
-    handleClear: Function
+    handleClear: Function,
+    setEditMode: Function,
+    setEditId: Function
 }
 
-const Groceries = ({ groceries, handleDelete, handleClear }: propTypes) => {
+const Groceries = ({ groceries, handleDelete, handleClear, setEditMode, setEditId }: propTypes) => {
     return (
         <section className="groceries">
             {
                 groceries.map((grocery, index) => {
                     return (
-                        <Grocery handleDelete={handleDelete} grocery={grocery} key={index} />
+                        <Grocery setEditMode={setEditMode} setEditId={setEditId} handleDelete={handleDelete} grocery={grocery} key={index} />
                     )
                 })
             }
